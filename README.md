@@ -2,7 +2,7 @@
 
 [Axios](https://www.npmjs.com/package/axios) as a Redux Middleware, by [Victor Buzzegoli](https://twitter.com/victorbuzzegoli)
 
-Lightweight, Powerfull, _MMMM_ compliant (check out : [Modern Modular Middleware Model](https://twitter.com/victorbuzzegoli))
+Lightweight, Powerfull, _MMMM_ compliant (check out : [Modern Modular Middleware Model](https://github.com/vbuzzegoli/4m))
 
 ## Installation
 
@@ -23,7 +23,7 @@ To start using **Axiom**, you will first need to apply the middleware to your st
 
 ## Usage
 
-#### Basic REST call
+### Basic REST call
 
 > Using ES6+ syntax
 
@@ -61,7 +61,7 @@ To start using **Axiom**, you will first need to apply the middleware to your st
 
 > Note that `axios` is an object supporting any configuration available via [Axios API](https://www.npmjs.com/package/axios#axios-api). Check out `Axios` documentation to know about the different arguments available.
 
-#### Basic REST call with (pre-networking) throttling
+### Basic REST call with (pre-networking) throttling
 
 > Using ES6+ syntax
 
@@ -86,11 +86,11 @@ To start using **Axiom**, you will first need to apply the middleware to your st
     	}
     }
 
-> Note that **Axiom**'s throttling module is also available as a _standalone middleware_ in a more advanced verson. If you only need to throttle your actions, or need to use more advanced features such as throttling based reactions, please check out [Hurakken](https://twitter.com/victorbuzzegoli), a lightweight and _MMMM_ compliant Redux Middleware.
+> Note that **Axiom**'s throttling module is also available as a _standalone middleware_ in a more advanced verson. If you only need to throttle your actions, or need to use more advanced features such as throttling based reactions, please check out [Hurakken](https://github.com/vbuzzegoli/hurakken), a lightweight and _MMMM_ compliant Redux Middleware.
 
 > `throttle` is a value in **milliseconds** for which this action will not be dispatchable again. Note that due to Javascript single threaded environment, this value can be subject to slight variant, and is therefore not precisely defined.
 
-##### Behaviour
+#### Behaviour
 
 -   By default, on success, the `payload` will be overridden by `promise.data`, and the action will be passed to the reducer (or next middleware).
 
@@ -98,7 +98,7 @@ To start using **Axiom**, you will first need to apply the middleware to your st
 
 -   Use `onSuccess`, `onError`, and `onUnexpected Status` to override the default behaviour
 
-> Note that these functions are called **reactions**, accordingly to the [Modern Modular Middleware Model](https://twitter.com/victorbuzzegoli). Therefore they contain a `next` argument that can be use to release an action to the reducer (or next middleware). They can be used like :
+> Note that these functions are called **reactions**, accordingly to the [Modern Modular Middleware Model](https://github.com/vbuzzegoli/4m). Therefore they contain a `next` argument that can be use to release an action to the reducer (or next middleware). They can be used like :
 
 In `/reactions` :
 
@@ -124,7 +124,7 @@ In `/actions` :
     	}
     }
 
-> If you were to use a non 4M compliant middleware such as _redux-thunk_, which is **deprecated by the [4M documentation](https://twitter.com/victorbuzzegoli)**, please note that, by default, using/dispatching the action returned by `onSuccess` or `onUnexpectedStatus` will not trigger _Axiom_ again even though the arguments are still contained in the action's parameters. To force triggering _Axiom_ again, use : `_skip: false` or remove `_skip` in the `axiom` node.
+> If you were to use a non 4M compliant middleware such as _redux-thunk_, which is **deprecated by the [4M documentation](https://github.com/vbuzzegoli/4m)**, please note that, by default, using/dispatching the action returned by `onSuccess` or `onUnexpectedStatus` will not trigger _Axiom_ again even though the arguments are still contained in the action's parameters. To force triggering _Axiom_ again, use : `_skip: false` or remove `_skip` in the `axiom` node.
 
 -   Use `log: true` to print the middleware logs in the console (add `xlog: true` for extended logs)
 
