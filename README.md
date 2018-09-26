@@ -2,7 +2,7 @@
 
 [Axios](https://www.npmjs.com/package/axios) as a Redux Middleware, by [Victor Buzzegoli](https://twitter.com/victorbuzzegoli)
 
-Lightweight, Powerfull, _MMMM_ compliant (check out : [Modern Modular Middleware Model](https://github.com/vbuzzegoli/4m))
+Lightweight, Powerfull, _4M_ compliant (check out : [Modern Modular Middleware Model](https://github.com/vbuzzegoli/4m))
 
 ## Installation
 
