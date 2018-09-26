@@ -1,0 +1,31 @@
+{
+  "name": "redux-axiom",
+  "version": "1.2.3",
+  "description": "Axios as a Redux Middleware (4M compliant)",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vbuzzegoli/axiom.git"
+  },
+  "keywords": [
+    "axios",
+    "redux",
+    "middleware",
+    "4M",
+    "modern",
+    "modular",
+    "model"
+  ],
+  "author": "Victor Buzzegoli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vbuzzegoli/axiom/issues"
+  },
+  "homepage": "https://github.com/vbuzzegoli/axiom#readme"
+}
