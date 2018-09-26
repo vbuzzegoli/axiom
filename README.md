@@ -44,7 +44,7 @@ To start using **Axiom**, you will first need to apply the middleware to your st
         );
     };
 
-**With** Axiom (_MMMM_ compliant) :
+**With** Axiom (_4M_ compliant) :
 
     import * as actions from "../constants/action-types";
 
@@ -70,7 +70,7 @@ To start using **Axiom**, you will first need to apply the middleware to your st
     //Too long to be shown here
     //Code grows exponentially
 
-**With** Axiom (_MMMM_ compliant) :
+**With** Axiom (_4M_ compliant) :
 
     import * as actions from "../constants/action-types";
 
@@ -86,7 +86,7 @@ To start using **Axiom**, you will first need to apply the middleware to your st
       }
     }
 
-> Note that **Axiom**'s throttling module is also available as a _standalone middleware_ in a more advanced verson. If you only need to throttle your actions, or need to use more advanced features such as throttling based reactions, please check out [Hurakken](https://github.com/vbuzzegoli/hurakken), a lightweight and _MMMM_ compliant Redux Middleware.
+> Note that **Axiom**'s throttling module is also available as a _standalone middleware_ in a more advanced verson. If you only need to throttle your actions, or need to use more advanced features such as throttling based reactions, please check out [Hurakken](https://github.com/vbuzzegoli/hurakken), a lightweight and _4M_ compliant Redux Middleware.
 
 > `throttle` is a value in **milliseconds** for which this action will not be dispatchable again. Note that due to Javascript single threaded environment, this value can be subject to slight variant, and is therefore not precisely defined.
 
