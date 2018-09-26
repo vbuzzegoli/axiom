@@ -33,15 +33,15 @@ To start using **Axiom**, you will first need to apply the middleware to your st
     import * as actions from "../constants/action-types";
 
     export const fetchApi = () => dispatch => {
-    	const url = `https://itunes.apple.com/search?term=hello`;
-    	return axios
-    		.get(url)
-    		.then(promise =>
-    			dispatch({
-    				type: actions.FETCH_API,
-    				payload: promise.data
-    			})
-    		);
+      const url = `https://itunes.apple.com/search?term=hello`;
+      return axios
+        .get(url)
+        .then(promise =>
+          dispatch({
+            type: actions.FETCH_API,
+            payload: promise.data
+          })
+        );
     };
 
 **With** Axiom (_MMMM_ compliant) :
@@ -49,14 +49,14 @@ To start using **Axiom**, you will first need to apply the middleware to your st
     import * as actions from "../constants/action-types";
 
     export const fetchApi = () => {
-    	type: actions.FETCH_API,
-    	payload: [],
-    	axiom: {
-    		axios: {
-    			method:`get`,
-    			url:`https://itunes.apple.com/search?term=hello`
-    		}
-    	}
+      type: actions.FETCH_API,
+      payload: [],
+      axiom: {
+        axios: {
+          method:`get`,
+          url:`https://itunes.apple.com/search?term=hello`
+        }
+      }
     }
 
 > Note that `axios` is an object supporting any configuration available via [Axios API](https://www.npmjs.com/package/axios#axios-api). Check out `Axios` documentation to know about the different arguments available.
@@ -75,15 +75,15 @@ To start using **Axiom**, you will first need to apply the middleware to your st
     import * as actions from "../constants/action-types";
 
     export const fetchApi = () => {
-    	type: actions.FETCH_API,
-    	payload: [],
-    	axiom: {
-    		axios: {
-    			method:`get`,
-    			url:`https://itunes.apple.com/search?term=hello`
-    		},
-    		throttle: 3000
-    	}
+      type: actions.FETCH_API,
+      payload: [],
+      axiom: {
+        axios: {
+          method:`get`,
+          url:`https://itunes.apple.com/search?term=hello`
+        },
+        throttle: 3000
+      }
     }
 
 > Note that **Axiom**'s throttling module is also available as a _standalone middleware_ in a more advanced verson. If you only need to throttle your actions, or need to use more advanced features such as throttling based reactions, please check out [Hurakken](https://github.com/vbuzzegoli/hurakken), a lightweight and _MMMM_ compliant Redux Middleware.
@@ -92,19 +92,19 @@ To start using **Axiom**, you will first need to apply the middleware to your st
 
 #### Behaviour
 
--   By default, on success, the `payload` will be overridden by `promise.data`, and the action will be passed to the reducer (or next middleware).
+- By default, on success, the `payload` will be overridden by `promise.data`, and the action will be passed to the reducer (or next middleware).
 
--   To prevent the extraction of the `data`, you can disable it manually by adding `extractData: false` to `axiom`.
+- To prevent the extraction of the `data`, you can disable it manually by adding `extractData: false` to `axiom`.
 
--   Use `onSuccess`, `onError`, and `onUnexpected Status` to override the default behaviour
+- Use `onSuccess`, `onError`, and `onUnexpected Status` to override the default behaviour
 
 > Note that these functions are called **reactions**, accordingly to the [Modern Modular Middleware Model](https://github.com/vbuzzegoli/4m). Therefore they contain a `next` argument that can be use to release an action to the reducer (or next middleware). They can be used like :
 
 In `/reactions` :
 
     export const customReaction = (newAction, next) => {
-    	console.log("SUCCESS!", newAction);
-    	next(newAction);
+      console.log("SUCCESS!", newAction);
+      next(newAction);
     };
 
 In `/actions` :
@@ -113,65 +113,65 @@ In `/actions` :
     import { customReaction } from "../reactions/customReaction";
 
     export const fetchApi = () => {
-    	type: actions.FETCH_API,
-    	payload: [],
-    	axiom: {
-    		axios: {
-    			method:`get`,
-    			url:`https://itunes.apple.com/search?term=hello`
-    		}
-    		onSuccess: customReaction
-    	}
+      type: actions.FETCH_API,
+      payload: [],
+      axiom: {
+        axios: {
+          method:`get`,
+          url:`https://itunes.apple.com/search?term=hello`
+        }
+        onSuccess: customReaction
+      }
     }
 
 > If you were to use a non 4M compliant middleware such as _redux-thunk_, which is **deprecated by the [4M documentation](https://github.com/vbuzzegoli/4m)**, please note that, by default, using/dispatching the action returned by `onSuccess` or `onUnexpectedStatus` will not trigger _Axiom_ again even though the arguments are still contained in the action's parameters. To force triggering _Axiom_ again, use : `_skip: false` or remove `_skip` in the `axiom` node.
 
--   Use `log: true` to print the middleware logs in the console (add `xlog: true` for extended logs)
+- Use `log: true` to print the middleware logs in the console (add `xlog: true` for extended logs)
 
--   Supports Axios's _interceptors_
+- Supports Axios's _interceptors_
 
 Here is a overview of every options possible:
 
     axiom: {
-    	throttle: 3000,
-    	log: true,
-    	xlog: true,
-    	axios: {
-    		// e.g. Axios API's Documentation
-    		//...
-    	},
-    	extractData: false,
-    	onSuccess: (action, next) => {
-    		//...
-    	},
-    	onError: (error, prevAction, next) => {
-    		//...
-    	},
-    	onUnexpectedStatus: (promise, prevAction, next) => {
-    		//...
-    	},
-    	interceptors: {
-    		request: {
-    			config: (config) => {
-    				//...
-    				return config;
-    			},
-    			error: (error) => {
-    				//...
-    				return Promise.reject(error);
-    			}
-    		},
-    		response: {
-    			config: (config) => {
-    				//...
-    				return config;
-    			},
-    			error: (error) => {
-    				//...
-    				return Promise.reject(error);
-    			}
-    		}
-    	}
+      throttle: 3000,
+      log: true,
+      xlog: true,
+      axios: {
+        // e.g. Axios API's Documentation
+        //...
+      },
+      extractData: false,
+      onSuccess: (action, next) => {
+        //...
+      },
+      onError: (error, prevAction, next) => {
+        //...
+      },
+      onUnexpectedStatus: (promise, prevAction, next) => {
+        //...
+      },
+      interceptors: {
+        request: {
+          config: (config) => {
+            //...
+            return config;
+          },
+          error: (error) => {
+            //...
+            return Promise.reject(error);
+          }
+        },
+        response: {
+          config: (config) => {
+            //...
+            return config;
+          },
+          error: (error) => {
+            //...
+            return Promise.reject(error);
+          }
+        }
+      }
     }
 
 ## Version
