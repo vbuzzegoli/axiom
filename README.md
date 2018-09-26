@@ -16,10 +16,12 @@ To install **Axiom** in your project, navigate to your project folder in your te
 
 To start using **Axiom**, you will first need to apply the middleware to your store, just like any redux middleware :
 
+```javascript
     ...
     import axiom from "redux-axiom";
     ...
     export default createStore(rootReducer,applyMiddleware([axiom]));
+```
 
 ## Usage
 
@@ -29,23 +31,24 @@ To start using **Axiom**, you will first need to apply the middleware to your st
 
 **Without** Axiom (using redux-thunk) :
 
-    import axios from "axios";
-    import * as actions from "../constants/action-types";
+```javascript
+import axios from "axios";
+import * as actions from "../constants/action-types";
 
-    export const fetchApi = () => dispatch => {
-      const url = `https://itunes.apple.com/search?term=hello`;
-      return axios
-        .get(url)
-        .then(promise =>
-          dispatch({
-            type: actions.FETCH_API,
-            payload: promise.data
-          })
-        );
-    };
+export const fetchApi = () => dispatch => {
+  const url = `https://itunes.apple.com/search?term=hello`;
+  return axios.get(url).then(promise =>
+    dispatch({
+      type: actions.FETCH_API,
+      payload: promise.data
+    })
+  );
+};
+```
 
 **With** Axiom (_4M_ compliant) :
 
+```javascript
     import * as actions from "../constants/action-types";
 
     export const fetchApi = () => {
@@ -58,6 +61,7 @@ To start using **Axiom**, you will first need to apply the middleware to your st
         }
       }
     }
+```
 
 > Note that `axios` is an object supporting any configuration available via [Axios API](https://www.npmjs.com/package/axios#axios-api). Check out `Axios` documentation to know about the different arguments available.
 
@@ -67,11 +71,14 @@ To start using **Axiom**, you will first need to apply the middleware to your st
 
 **Without** Axiom (using redux-thunk) :
 
-    //Too long to be shown here
-    //Code grows exponentially
+```javascript
+//Too long to be shown here
+//Code grows exponentially
+```
 
 **With** Axiom (_4M_ compliant) :
 
+```javascript
     import * as actions from "../constants/action-types";
 
     export const fetchApi = () => {
@@ -85,6 +92,7 @@ To start using **Axiom**, you will first need to apply the middleware to your st
         throttle: 3000
       }
     }
+```
 
 > Note that **Axiom**'s throttling module is also available as a _standalone middleware_ in a more advanced verson. If you only need to throttle your actions, or need to use more advanced features such as throttling based reactions, please check out [Hurakken](https://github.com/vbuzzegoli/hurakken), a lightweight and _4M_ compliant Redux Middleware.
 
@@ -102,13 +110,16 @@ To start using **Axiom**, you will first need to apply the middleware to your st
 
 In `/reactions` :
 
-    export const customReaction = (newAction, next) => {
-      console.log("SUCCESS!", newAction);
-      next(newAction);
-    };
+```javascript
+export const customReaction = (newAction, next) => {
+  console.log("SUCCESS!", newAction);
+  next(newAction);
+};
+```
 
 In `/actions` :
 
+```javascript
     import * as actions from "../constants/action-types";
     import { customReaction } from "../reactions/customReaction";
 
@@ -123,6 +134,7 @@ In `/actions` :
         onSuccess: customReaction
       }
     }
+```
 
 > If you were to use a non 4M compliant middleware such as _redux-thunk_, which is **deprecated by the [4M documentation](https://github.com/vbuzzegoli/4m)**, please note that, by default, using/dispatching the action returned by `onSuccess` or `onUnexpectedStatus` will not trigger _Axiom_ again even though the arguments are still contained in the action's parameters. To force triggering _Axiom_ again, use : `_skip: false` or remove `_skip` in the `axiom` node.
 
@@ -132,6 +144,7 @@ In `/actions` :
 
 Here is a overview of every options possible:
 
+```javascript
     axiom: {
       throttle: 3000,
       log: true,
@@ -173,10 +186,11 @@ Here is a overview of every options possible:
         }
       }
     }
+```
 
 ## Version
 
-1.2.3
+1.2.4
 
 ## License
 
