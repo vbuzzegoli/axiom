@@ -111,8 +111,12 @@ export const fetchApi = () => dispatch => {
 In `/reactions` :
 
 ```javascript
-export const customReaction = (newAction, next) => {
+export const customReaction = (newAction, next, dispatch) => {
   console.log("SUCCESS!", newAction);
+
+  dispatch({ type: `ANOTHER_ACTION`, payload: 0 });
+  dispatch({ type: `YET_ANOTHER_ACTION`, payload: 0 });
+
   next(newAction);
 };
 ```
@@ -154,13 +158,13 @@ Here is a overview of every options possible:
         //...
       },
       extractData: false,
-      onSuccess: (action, next) => {
+      onSuccess: (action, next, dispatch) => {
         //...
       },
-      onError: (error, prevAction, next) => {
+      onError: (error, prevAction, next, dispatch) => {
         //...
       },
-      onUnexpectedStatus: (promise, prevAction, next) => {
+      onUnexpectedStatus: (promise, prevAction, next, dispatch) => {
         //...
       },
       interceptors: {
@@ -406,7 +410,7 @@ You can define a custom HTTP status code error range using the `validateStatus` 
 
 ## Version
 
-1.3.0
+1.4.0
 
 ## License
 

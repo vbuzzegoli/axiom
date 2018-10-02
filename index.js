@@ -61,7 +61,12 @@ const axiom = store => next => action => {
 							if (onUnexpectedStatus) {
 								const newAction = clone(action);
 								newAction.axiom._skip = true;
-								onUnexpectedStatus(promise, newAction);
+								onUnexpectedStatus(
+									promise,
+									newAction,
+									next,
+									store.dispatch
+								);
 							}
 							throw new Error("UNEXPECTED_STATUS");
 						}
@@ -92,7 +97,7 @@ const axiom = store => next => action => {
 										`[Axiom done for: ${action.type}]`,
 										action
 									);
-							onSuccess(newAction, next);
+							onSuccess(newAction, next, store.dispatch);
 						} else {
 							if (log) {
 								console.log(`[Dispatching..] - ${action.type}`);
@@ -118,7 +123,7 @@ const axiom = store => next => action => {
 									);
 							}
 							if (onError) {
-								onError(err, action);
+								onError(err, action, next, store.dispatch);
 							}
 							return;
 						}
@@ -181,7 +186,12 @@ const axiom = store => next => action => {
 								if (onUnexpectedStatus) {
 									const newAction = clone(action);
 									newAction.axiom._skip = true;
-									onUnexpectedStatus(promise, newAction);
+									onUnexpectedStatus(
+										promise,
+										newAction,
+										next,
+										store.dispatch
+									);
 								}
 								throw new Error("UNEXPECTED_STATUS");
 							}
@@ -214,7 +224,7 @@ const axiom = store => next => action => {
 											`[Axiom done for: ${action.type}]`,
 											action
 										);
-								onSuccess(newAction, next);
+								onSuccess(newAction, next, store.dispatch);
 							} else {
 								if (log) {
 									console.log(
@@ -242,7 +252,7 @@ const axiom = store => next => action => {
 										);
 								}
 								if (onError) {
-									onError(err, action);
+									onError(err, action, next, store.dispatch);
 								}
 								return;
 							}
