@@ -1,6 +1,6 @@
 {
   "name": "redux-axiom",
-  "version": "1.3.0",
+  "version": "1.4.1",
   "description": "Axios as a Redux Middleware (4M compliant)",
   "main": "index.js",
   "dependencies": {
