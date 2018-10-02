@@ -100,7 +100,7 @@ export const fetchApi = () => dispatch => {
 
 #### Behaviour
 
-- By default, on success, the `payload` will be overridden by `promise.data`, and the action will be passed to the reducer (or next middleware).
+- By default, on success, the `payload` will be overridden by `promise.data` (if the data is of type _json_), and the action will be passed to the reducer (or next middleware).
 
 - To prevent the extraction of the `data`, you can disable it manually by adding `extractData: false` to `axiom`.
 
@@ -410,7 +410,7 @@ You can define a custom HTTP status code error range using the `validateStatus` 
 
 ## Version
 
-1.4.0
+1.4.1
 
 ## License
 
