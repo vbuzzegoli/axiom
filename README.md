@@ -2,7 +2,7 @@
 
 [Axios](https://www.npmjs.com/package/axios) as a Redux Middleware, by [Victor Buzzegoli](https://twitter.com/victorbuzzegoli)
 
-Lightweight, Powerfull, _4M_ compliant (check out : [Modern Modular Middleware Model](https://github.com/vbuzzegoli/4m))
+Lightweight, Powerfull, _4M_ 1.6 compliant (check out : [Modern Modular Middleware Model](https://github.com/vbuzzegoli/4m))
 
 ## Installation
 
@@ -76,7 +76,7 @@ export const fetchApi = () => dispatch => {
 //Code grows exponentially
 ```
 
-**With** Axiom (_4M_ compliant) :
+**With** Hurakken & Axiom (_4M_ compliant) :
 
 ```javascript
     import * as actions from "../constants/action-types";
@@ -84,17 +84,19 @@ export const fetchApi = () => dispatch => {
     export const fetchApi = () => {
       type: actions.FETCH_API,
       payload: [],
+      hurakken: {
+        throttle: 3000
+      },
       axiom: {
         axios: {
           method:`get`,
           url:`https://itunes.apple.com/search?term=hello`
-        },
-        throttle: 3000
+        }
       }
     }
 ```
 
-> Note that **Axiom**'s throttling module is also available as a _standalone middleware_ in a more advanced verson. If you only need to throttle your actions, or need to use more advanced features such as throttling based reactions, please check out [Hurakken](https://github.com/vbuzzegoli/hurakken), a lightweight and _4M_ compliant Redux Middleware.
+> Check out [Hurakken](https://github.com/vbuzzegoli/hurakken), a lightweight and _4M_ compliant Redux Middleware, used for throttling.
 
 > `throttle` is a value in **milliseconds** for which this action will not be dispatchable again. Note that due to Javascript single threaded environment, this value can be subject to slight variant, and is therefore not precisely defined.
 
@@ -150,7 +152,6 @@ Here is a overview of every options possible:
 
 ```javascript
     axiom: {
-      throttle: 3000,
       log: true,
       xlog: true,
       axios: {
@@ -410,7 +411,7 @@ You can define a custom HTTP status code error range using the `validateStatus` 
 
 ## Version
 
-1.4.1
+1.5.0
 
 ## License
 
